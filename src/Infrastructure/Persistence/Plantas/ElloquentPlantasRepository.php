@@ -54,7 +54,8 @@ class ElloquentPlantasRepository implements PlantasRepository
     public function findPlantaOfId(int $id): Plantas
     {
         try {
-            return Plantas::findOrFail($id);
+            $datos = Plantas::findOrFail($id);
+            return $datos->orderBy('proximo_riego', 'desc')->first();
         } catch (ModelNotFoundException $e) {
             throw new PlantaNotFoundException();
         }
