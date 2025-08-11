@@ -6,6 +6,7 @@ namespace App\Infrastructure\Persistence\Plantas;
 
 use App\Domain\Model\Plantas\Plantas;
 use App\Domain\DomainException\Planta\CategoriaNotFoundException;
+use App\Domain\DomainException\Planta\PlantaNotFoundException;
 use App\Domain\Repository\PlantasRepository;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -50,4 +51,12 @@ class ElloquentPlantasRepository implements PlantasRepository
         return $planta;
     }
 
+    public function findPlantaOfId(int $id): Plantas
+    {
+        try {
+            return Plantas::findOrFail($id);
+        } catch (ModelNotFoundException $e) {
+            throw new PlantaNotFoundException();
+        }
+    }
 }
