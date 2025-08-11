@@ -19,7 +19,7 @@ interface PlantasRepository
      * @return User
      * @throws UserNotFoundException
      */
-    public function findPlantaOfId(int $id): Plantas;
+    public function findPlantaCategoria($enum): Plantas;
 
     /**
      * @param array $data
