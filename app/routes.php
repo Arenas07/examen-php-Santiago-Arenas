@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Application\Controllers\Plantas\PlantasController;
 use App\Application\Controllers\User\UserController;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -28,4 +29,10 @@ return function (App $app) {
     });
 
     //Agregar las rutas aquí abajo.
+
+    $app->group('/plantas', function (Group $group) {
+        $group->get('', [PlantasController::class, 'index']);
+        $group->post('', [PlantasController::class, 'create']);
+    });
+
 };
