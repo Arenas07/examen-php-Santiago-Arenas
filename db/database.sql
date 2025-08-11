@@ -59,3 +59,20 @@ INSERT INTO plantas (nombre, categoria, familia, proximo_riego) VALUES
 ("Pitahaya", "cactus", "Cactaceae", "2025-08-21");
 
 
+
+CREATE TRIGGER Trg_InsertProximoRiego
+BEFORE INSERT ON plantas
+FOR EACH ROW
+BEGIN
+
+    SET NEW.proximo_riego = DATE_ADD(CURDATE(), INTERVAL
+        CASE
+            WHEN NEW.categoria = 'cactus' THEN 10
+            WHEN NEW.categoria = 'ornamental' THEN 3
+            WHEN NEW.categoria = 'frutal' THEN 5
+        END DAY);
+
+
+END;
+
+SELECT * FROM plantas;
