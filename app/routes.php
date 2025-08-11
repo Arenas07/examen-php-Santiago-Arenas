@@ -32,6 +32,7 @@ return function (App $app) {
 
     $app->group('/plantas', function (Group $group) {
         $group->get('', [PlantasController::class, 'index']);
+        $group->get('/categoria/{categoria}', [PlantasController::class, 'findPlantaCategoria']);
         $group->post('', [PlantasController::class, 'create']);
     });
 
