@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Infrastructure\Persistence\Plantas;
 
 use App\Domain\Model\Plantas\Plantas;
-use App\Domain\DomainException\User\UserNotFoundException;
+use App\Domain\DomainException\Planta\CategoriaNotFoundException;
 use App\Domain\Repository\PlantasRepository;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -28,12 +28,12 @@ class ElloquentPlantasRepository implements PlantasRepository
     /**
      * {@inheritdoc}
      */
-    public function findPlantaOfId(int $id): Plantas
+    public function findPlantaCategoria($enum): Plantas
     {
         try {
-            return Plantas::findOrFail($id);
+            return Plantas::findOrFail($enum);
         } catch (ModelNotFoundException $e) {
-            throw new UserNotFoundException();
+            throw new CategoriaNotFoundException();
         }
     }
 
